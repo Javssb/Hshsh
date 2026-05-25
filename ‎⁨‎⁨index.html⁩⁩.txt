@@ -1,0 +1,312 @@
+<!-- //////////////////////////
+LAND ARAB UPDATE
+LOBBY + PROFILE + SHOP
+////////////////////////// -->
+
+<style>
+
+#lobby{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(black,#111);
+z-index:200;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:white;
+font-family:Arial;
+}
+
+#profile{
+position:absolute;
+top:20px;
+left:20px;
+background:rgba(255,255,255,0.1);
+padding:15px;
+border-radius:15px;
+}
+
+#coins{
+position:absolute;
+top:20px;
+right:20px;
+background:gold;
+color:black;
+padding:10px;
+border-radius:10px;
+font-weight:bold;
+}
+
+#rank{
+margin-top:10px;
+color:orange;
+}
+
+.menuBtn{
+width:250px;
+padding:20px;
+margin:10px;
+border:none;
+border-radius:15px;
+font-size:22px;
+background:red;
+color:white;
+}
+
+#shop{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#111;
+z-index:250;
+color:white;
+padding:20px;
+}
+
+.skin{
+background:#222;
+padding:20px;
+margin:10px;
+border-radius:15px;
+}
+
+.buyBtn{
+padding:10px;
+background:green;
+color:white;
+border:none;
+border-radius:10px;
+}
+
+#battlePass{
+position:absolute;
+bottom:20px;
+left:20px;
+background:purple;
+padding:15px;
+border-radius:15px;
+}
+
+</style>
+
+<div id="lobby">
+
+<div id="profile">
+<h2>👤 IBRAHIM</h2>
+<div>Level: 5</div>
+<div id="rank">Rank: GOLD</div>
+</div>
+
+<div id="coins">
+💰 2500 Coins
+</div>
+
+<h1 style="font-size:60px;">
+LAND ARAB
+</h1>
+
+<button class="menuBtn"
+onclick="startMatch()">
+🎮 START MATCH
+</button>
+
+<button class="menuBtn"
+onclick="openShop()">
+🛒 SHOP
+</button>
+
+<button class="menuBtn">
+👥 SQUAD
+</button>
+
+<button class="menuBtn">
+🏆 RANKED
+</button>
+
+<div id="battlePass">
+🎟️ Battle Pass Active
+</div>
+
+</div>
+
+<div id="shop">
+
+<h1>🛒 SHOP</h1>
+
+<div class="skin">
+<h2>🔥 Desert Soldier</h2>
+<p>Price: 1000 Coins</p>
+
+<button class="buyBtn"
+onclick="buySkin('Desert Soldier')">
+BUY
+</button>
+</div>
+
+<div class="skin">
+<h2>💀 Shadow Warrior</h2>
+<p>Price: 2000 Coins</p>
+
+<button class="buyBtn"
+onclick="buySkin('Shadow Warrior')">
+BUY
+</button>
+</div>
+
+<div class="skin">
+<h2>⚡ Golden AK</h2>
+<p>Price: 3000 Coins</p>
+
+<button class="buyBtn"
+onclick="buySkin('Golden AK')">
+BUY
+</button>
+</div>
+
+<button class="menuBtn"
+onclick="closeShop()">
+⬅ BACK
+</button>
+
+</div>
+
+<script>
+
+//////////////////////////////
+// PLAYER DATA
+//////////////////////////////
+
+let playerCoins = 2500;
+
+let ownedSkins = [];
+
+//////////////////////////////
+// START MATCH
+//////////////////////////////
+
+function startMatch(){
+
+document.getElementById(
+"lobby"
+).style.display="none";
+
+alert("Match Started 🔥");
+
+}
+
+//////////////////////////////
+// SHOP
+//////////////////////////////
+
+function openShop(){
+
+document.getElementById(
+"shop"
+).style.display="block";
+
+}
+
+function closeShop(){
+
+document.getElementById(
+"shop"
+).style.display="none";
+
+}
+
+//////////////////////////////
+// BUY SYSTEM
+//////////////////////////////
+
+function buySkin(name){
+
+let price = 1000;
+
+if(name==="Shadow Warrior")
+price = 2000;
+
+if(name==="Golden AK")
+price = 3000;
+
+if(playerCoins >= price){
+
+playerCoins -= price;
+
+ownedSkins.push(name);
+
+document.getElementById(
+"coins"
+).innerHTML =
+"💰 " + playerCoins + " Coins";
+
+alert(
+"Purchased: " + name
+);
+
+}else{
+
+alert(
+"Not enough coins ❌"
+);
+
+}
+
+}
+
+//////////////////////////////
+// XP SYSTEM
+//////////////////////////////
+
+let xp = 0;
+
+function addXP(amount){
+
+xp += amount;
+
+if(xp >= 100){
+
+xp = 0;
+
+alert(
+"LEVEL UP 🔥"
+);
+
+}
+
+}
+
+//////////////////////////////
+// DAILY REWARD
+//////////////////////////////
+
+setTimeout(()=>{
+
+playerCoins += 500;
+
+document.getElementById(
+"coins"
+).innerHTML =
+"💰 " + playerCoins + " Coins";
+
+alert(
+"Daily Reward +500 Coins 🎁"
+);
+
+},5000);
+
+//////////////////////////////
+// MULTIPLAYER READY
+//////////////////////////////
+
+console.log(
+"LAND ARAB Multiplayer Ready"
+);
+
+</script>
